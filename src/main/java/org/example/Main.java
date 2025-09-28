@@ -29,8 +29,9 @@ public class Main
                 System.out.println("find_membership - will find a membership from an user phone number ");
                 System.out.println("add_membership - will add a membership to an user phone number ");
                 System.out.println("remove_membership - will remove a membership with a phone number ");
+                System.out.println("enter_gym - will mark membership as in the gym (found by phone number) ");
+                System.out.println("exit_gym - will mark membership as out of the gym (found by phone number) ");
         }
-
 
         public static void FindUser()
         {
@@ -156,6 +157,41 @@ public class Main
                 else System.out.println("Couldn't remove membership");
         }
 
+        public static void EnterGym() {
+                System.out.print("Enter phone Number: ");
+                String phoneNumber = scanner.nextLine();
+
+                if(!Utils.ValidatePhoneNumber(phoneNumber)) {
+                        System.out.println("Invalid phone number format. It must start with +");
+                        return;
+                } else phoneNumber = Utils.FormatPhoneNumberForQuery(phoneNumber);
+
+                boolean result = MembershipOptions.MembershipEnter(phoneNumber);
+                if(!result) {
+                        System.out.println("Couldn't enter");
+                } else {
+                        System.out.println("Entered membership");
+                }
+        }
+
+
+        public static void ExitGym() {
+                System.out.print("Enter phone Number: ");
+                String phoneNumber = scanner.nextLine();
+
+                if(!Utils.ValidatePhoneNumber(phoneNumber)) {
+                        System.out.println("Invalid phone number format. It must start with +");
+                        return;
+                } else phoneNumber = Utils.FormatPhoneNumberForQuery(phoneNumber);
+
+                boolean result = MembershipOptions.MembershipExit(phoneNumber);
+                if(!result) {
+                        System.out.println("Couldn't exit");
+                } else {
+                        System.out.println("Exited successfully");
+                }
+        }
+
         public static void main(String[] args)
         {
                 String option = "";
@@ -200,6 +236,14 @@ public class Main
 
                                 case "remove_membership":
                                         RemoveMembership();
+                                        break;
+
+                                case "enter_gym":
+                                        EnterGym();
+                                        break;
+
+                                case "exit_gym":
+                                        ExitGym();
                                         break;
 
                                 default:

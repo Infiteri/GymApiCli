@@ -251,4 +251,56 @@ public class MembershipOptions
 
                 return false;
         }
+
+        public static boolean MembershipEnter(String userPhone) {
+                HttpURLConnection conn = null;
+                try
+                {
+                        conn = ApiUtils.FetchApi(
+                                "/api/v1/membership/enter?phoneNumber=" + userPhone,
+                                ApiUtils.RequestMethod.POST, null
+                        );
+
+                        if (conn.getResponseCode() != 200)
+                        {
+                                return false;
+                        }
+
+                        return true;
+                } catch (Exception e)
+                {
+                        e.printStackTrace();
+                } finally
+                {
+                        if (conn != null) conn.disconnect();
+                }
+
+                return false;
+        }
+
+        public static boolean MembershipExit(String userPhone) {
+                HttpURLConnection conn = null;
+                try
+                {
+                        conn = ApiUtils.FetchApi(
+                                "/api/v1/membership/exit?phoneNumber=" + userPhone,
+                                ApiUtils.RequestMethod.POST, null
+                        );
+
+                        if (conn.getResponseCode() != 200)
+                        {
+                                return false;
+                        }
+
+                        return true;
+                } catch (Exception e)
+                {
+                        e.printStackTrace();
+                } finally
+                {
+                        if (conn != null) conn.disconnect();
+                }
+
+                return false;
+        }
 }
